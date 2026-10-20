@@ -16,6 +16,8 @@ jobs:
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null || true
           $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Remove selectors without images
+        run: rm -f src/main/theme-adv/drawable/theme_tab_{chats,more,now,piccoma,shopping,call}_icon.xml
       - run: chmod +x gradlew && ./gradlew assembleDebug --no-daemon
       - uses: actions/upload-artifact@v4
         with:
